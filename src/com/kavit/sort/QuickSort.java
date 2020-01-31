@@ -1,4 +1,4 @@
-package com.kavit;
+package com.kavit.sort;
 
 import java.util.Arrays;
 
