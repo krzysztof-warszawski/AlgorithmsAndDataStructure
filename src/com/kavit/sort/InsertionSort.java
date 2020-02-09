@@ -16,6 +16,7 @@ public class InsertionSort {
             }
             intArray[j] = newElement;
         }
+
         System.out.println(Arrays.toString(intArray));
     }
 }

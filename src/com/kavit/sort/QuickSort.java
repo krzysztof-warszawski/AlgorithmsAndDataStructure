@@ -3,38 +3,50 @@ package com.kavit.sort;
 import java.util.Arrays;
 
 public class QuickSort {
+    public static void main(String[] args) {
 
-    public static int partition(int[] array, int lowIndex, int highIndex) {
-        int pivot = array[highIndex];
-        int i = (lowIndex-1);
-        for (int j=lowIndex; j<highIndex; j++) {
+        int[] intArray = {2, -4, 32, 55, -14, 12, 7, 31};
 
-            if (array[j] < pivot) {
-                i++;
+        quickSort(intArray, 0, intArray.length);
 
-                int temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
+        for (int i = 0; i < intArray.length; i++) {
+            System.out.println(intArray[i]);
+        }
+
+    }
+
+    public static void quickSort(int[] input, int start, int end) {
+        if (end - start < 2) {
+            return;
+        }
+
+        int pivotIndex = partition(input, start, end);
+        quickSort(input, start, pivotIndex);
+        quickSort(input, pivotIndex + 1, end);
+    }
+
+    public static int partition(int[] input, int start, int end) {
+        // Using the first element as the pivot
+        int pivot = input[start];
+        int i = start;
+        int j = end;
+
+        while (i < j) {
+
+            // NOTE: empty loop body
+            while (i < j && input[--j] >= pivot);
+            if (i < j) {
+                input[i] = input[j];
+            }
+
+            // NOTE: empty loop body
+            while (i < j && input[++i] <= pivot);
+            if (i < j) {
+                input[j] = input[i];
             }
         }
 
-        int temp = array[i+1];
-        array[i+1] = array[highIndex];
-        array[highIndex] = temp;
-
-        return i+1;
-    }
-
-    public static int[] quickSort(int[] array, int low, int high)
-    {
-        if (low < high) {
-
-            int par = partition(array, low, high);
-
-            quickSort(array, low, par-1);
-            quickSort(array, par+1, high);
-        }
-        System.out.println(Arrays.toString(array));
-        return array;
+        input[j] = pivot;
+        return j;
     }
 }
